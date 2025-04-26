@@ -1,0 +1,264 @@
+PART 1
+$cd ${CMAKE_CURRENT_SOURCE_DIR}/formatter_lib
+$sudo nano CMakeLists.txt
+/*
+make_minimum_required(VERSION 3.4)
+project(formatter_lib)
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+add_library(formatter_lib STATIC /klich26/workspace/projects/lab03/formatter_lib/formatter.cpp)
+
+*\
+
+$cmake -B build
+
+CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.5 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+-- The C compiler identification is GNU 13.2.0
+-- The CXX compiler identification is GNU 13.2.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done (1.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /klich26/workspace/projects/lab03/formatter_lib/build
+
+
+$cmake --build build
+[ 50%] Building CXX object CMakeFiles/formatter_lib.dir/formatter.cpp.o
+[100%] Linking CXX static library libformatter_lib.a
+[100%] Built target formatter_lib
+
+
+
+PART2
+$cd formatter_ex
+$nano CMakeLists.txt
+/*cmake_minimum_required(VERSION 3.4)
+project(formatter_ex_lib)
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+add_subdirectory(/klich26/workspace/projects/lab03/formatter_lib formatter_lib_dir)
+
+add_library(formatter_ex_lib STATIC /klich26/workspace/projects/lab03/formatter_ex/formatter_ex.cpp)
+target_include_directories(formatter_ex_lib PUBLIC /klich26/workspace/projects/lab03/formatter_lib)
+
+target_link_libraries(formatter_ex_lib formatter_lib)
+*\
+$cmake -B build
+
+
+CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.5 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+-- The C compiler identification is GNU 13.2.0
+-- The CXX compiler identification is GNU 13.2.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+CMake Deprecation Warning at /klich26/workspace/projects/lab03/formatter_lib/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.5 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+-- Configuring done (0.9s)
+-- Generating done (0.0s)
+-- Build files have been written to: /klich26/workspace/projects/lab03/formatter_ex/build
+
+$cmake --build build
+
+[25%] Building CXX object formatter_lib_dir/CMakeFiles/formatter_lib.dir/formatter.cpp.o
+[ 50%] Linking CXX static library libformatter_lib.a
+[ 50%] Built target formatter_lib
+[ 75%] Building CXX object CMakeFiles/formatter_ex_lib.dir/formatter_ex.cpp.o
+[100%] Linking CXX static library libformatter_ex_lib.a
+[100%] Built target formatter_ex_lib
+
+PART3
+$cd ../hello_world_application
+
+$nano CMakeLists.txt
+
+/*
+cmake_minimum_required(VERSION 3.4)
+project(hello_world)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED on)
+add_subdirectory(/klich26/workspace/projects/lab03/formatter_ex formatter_ex_lib_dir)
+
+add_executable(hello_world /klich26/workspace/projects/lab03/hello_world_application/hello_world.cpp)
+
+target_include_directories(hello_world PUBLIC /klich26/workspace/projects/lab03/formatter_ex_lib)
+
+target_link_libraries(hello_world formatter_ex_lib)
+*\
+
+$cmake -Build build
+CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.5 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+CMake Deprecation Warning at /klich26/workspace/projects/lab03/formatter_ex/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.5 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+CMake Deprecation Warning at /klich26/workspace/projects/lab03/formatter_lib/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.5 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /klich26/workspace/projects/lab03/hello_world_application/build
+
+$cmake --build build
+
+[ 16%] Building CXX object formatter_ex_lib_dir/formatter_lib_dir/CMakeFiles/formatter_lib.dir/formatter.cpp.o
+[ 33%] Linking CXX static library libformatter_lib.a
+[ 33%] Built target formatter_lib
+[ 50%] Building CXX object formatter_ex_lib_dir/CMakeFiles/formatter_ex_lib.dir/formatter_ex.cpp.o
+[ 66%] Linking CXX static library libformatter_ex_lib.a
+[ 66%] Built target formatter_ex_lib
+[ 83%] Building CXX object CMakeFiles/hello_world.dir/hello_world.cpp.o
+[100%] Linking CXX executable hello_world
+[100%] Built target hello_world
+
+$build/hello_world
+
+-------------------------
+hello, world!
+-------------------------
+$cd ../solver_application
+$nano CMakeLists.txt
+/*
+cmake_minimum_required(VERSION 3.4)
+
+project(solver)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+add_subdirectory(/klich26/workspace/projects/lab03/formatter_ex formatter_ex_lib_dir)
+add_subdirectory(/klich26/workspace/projects/lab03/solver_lib/ solver_lib_dir)
+
+add_executable(solver /klich26/workspace/projects/lab03/solver_application/equation.cpp)
+
+target_include_directories(formatter_ex_lib PUBLIC /klich26/workspace/projects/lab03/formatter_ex
+/klich26/workspace/projects/lab03/solver_lib
+)
+
+target_link_libraries(solver formatter_ex_lib solver_lib)
+
+*\
+$cmake -B build
+
+CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.5 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+CMake Deprecation Warning at /klich26/workspace/projects/lab03/formatter_ex/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.5 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+CMake Deprecation Warning at /klich26/workspace/projects/lab03/formatter_lib/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.5 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+CMake Deprecation Warning at /klich26/workspace/projects/lab03/solver_lib/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.5 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /klich26/workspace/projects/lab03/solver_application/build
+
+$cmake --build build
+
+[ 12%] Building CXX object solver_lib_dir/CMakeFiles/solver_lib.dir/solver.cpp.o
+[ 25%] Linking CXX static library libsolver_lib.a
+[ 25%] Built target solver_lib
+[ 37%] Building CXX object formatter_ex_lib_dir/formatter_lib_dir/CMakeFiles/formatter_lib.dir/formatter.cpp.o
+[ 50%] Linking CXX static library libformatter_lib.a
+[ 50%] Built target formatter_lib
+[ 62%] Building CXX object formatter_ex_lib_dir/CMakeFiles/formatter_ex_lib.dir/formatter_ex.cpp.o
+[ 75%] Linking CXX static library libformatter_ex_lib.a
+[ 75%] Built target formatter_ex_lib
+[ 87%] Building CXX object CMakeFiles/solver.dir/equation.cpp.o
+[100%] Linking CXX executable solver
+[100%] Built target solver
+
+$build/solver
+2
+3
+4
+-------------------------
+error: discriminant < 0
+-------------------------
+$build/solver
+1
+-2
+1
+-------------------------
+x1 = 1.000000
+-------------------------
+-------------------------
+x2 = 1.000000
+-------------------------
+
